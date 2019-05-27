@@ -1,0 +1,100 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Restaurant Profile</ion-title>
+        <button ion-button menuToggle right color="secondary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <ion-list>
+            <ion-list-header color="dark-light">
+                <h2>Basic Information</h2>
+            </ion-list-header>
+            <ion-item>
+                <ion-label fixed>Title</ion-label>
+                <ion-input type="text" formControlName="name" clearInput placeholder="Restaurant Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Description</ion-label>
+                <ion-textarea name="description" formControlName="description" rows="3" maxLength="500" placeholder="Description"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Menu Type</ion-label>
+                <ion-select formControlName="type">
+                    <ion-option [value]="All">All</ion-option>
+                    <ion-option [value]="Breakfast">Breakfast</ion-option>
+                    <ion-option [value]="Lunch">Lunch</ion-option>
+                    <ion-option [value]="Dinner">Dinner</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Ethnicity</ion-label>
+                <ion-input type="text" formControlName="ethnicity" clearInput placeholder="Ethnicity"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Cuisine</ion-label>
+                <ion-input type="text" formControlName="cuisine" clearInput placeholder="Cuisine"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Opening</ion-label>
+                <!-- <ion-input type="text" formControlName="opening" clearInput placeholder="11:00 AM"></ion-input> -->
+                <ion-datetime formControlName="opening" displayFormat="hh:mm A" pickerFormat="hh:mm A" placeholder="Opening" clearInput></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Closing</ion-label>
+                <!-- <ion-input type="text" formControlName="closing" clearInput placeholder="10:00 PM"></ion-input> -->
+                <ion-datetime formControlName="closing" displayFormat="hh:mm A" pickerFormat="hh:mm A" placeholder="Closing" clearInput></ion-datetime>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header color="dark-light">
+                <h2>Category</h2>
+            </ion-list-header>
+            <ion-item>
+                <ion-label fixed>Food</ion-label>
+                <ion-input type="text" formControlName="foodCategory" clearInput placeholder="Food Category"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Restaurant</ion-label>
+                <ion-input type="text" formControlName="restaurantCategory" clearInput placeholder="Restaurant Category"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header color="dark-light">
+                <h2>Contact</h2>
+            </ion-list-header>
+            <ion-item>
+                <ion-label fixed>Address</ion-label>
+                <ion-input type="text" formControlName="address" clearInput placeholder="Address"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Post Code</ion-label>
+                <ion-input type="text" formControlName="postcode" clearInput placeholder="Post Code"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Locality</ion-label>
+                <ion-input type="text" formControlName="locality" clearInput placeholder="Locality"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Region</ion-label>
+                <ion-input type="text" formControlName="region" clearInput placeholder="Region"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Contact</ion-label>
+                <ion-input type="number" formControlName="contact" clearInput placeholder="Contact"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>E-mail</ion-label>
+                <ion-input type="email" formControlName="email" clearInput placeholder="E-mail"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Web</ion-label>
+                <ion-input type="text" formControlName="web" clearInput placeholder="Web"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="secondary" (tap)="update()" [disabled]="!isReadyToSave">Update</button>
+    </form>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="addSpecial()">
+        <ion-icon name="md-add"></ion-icon>Add
+      </button>
+        </ion-buttons>
+        <ion-title>Specials</ion-title>
+        <button ion-button menuToggle right color="secondary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="card-background-page">
+    <ion-list>
+        <ion-item *ngFor="let s of specials">
+            <!-- {{specials['description']}} -->
+            <ion-thumbnail item-start>
+                <img src="{{ specialImgUrl + s.image }}">
+            </ion-thumbnail>
+            <h2>{{ s.title }}</h2>
+            <h3>{{ s.description }}• Price {{ s.price }} $</h3>
+            <h4>For {{ s.for}}</h4>
+            <p>Discount {{ s.discount}}%• After Discount: {{s.price - s.price * s.discount/100 }} $</p>
+            <p>Number Of Click: {{ s.click_count }}</p>
+            <button color="secondary" ion-button clear item-end (tap)="updateSpecial(s.id)">Edit</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

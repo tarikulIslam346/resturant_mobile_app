@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Settings</ion-title>
+        <button ion-button menuToggle right color="secondary">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+        <p>Restaurant owner will get your location update if you give permission.</p>
+    <ion-list>
+        <ion-item>
+            <!-- <h3>Restuarnt owner will get location update if you give permission</h3> -->
+            <ion-label>Start Tracking my location</ion-label>
+            <ion-toggle [(ngModel)]="isTracking" checked="false" (ionChange)="updateTrackingState()"></ion-toggle>
+                <!-- <h4>Current Latitude: {{locationTracker.lat}}</h4><br>
+                <h4>Current Longitude: {{locationTracker.lng}}</h4><br>
+                <h4>Current User: {{locationTracker.userId}}</h4>  -->
+        </ion-item>
+    </ion-list>
+    <p>Current Latitude: {{locationTracker.lat}}</p>
+    <p>Current Longitude: {{locationTracker.lng}}</p>
+    <br>
+    
+    <p>Change your password here</p>
+    <form *ngIf="form" [formGroup]="form">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Current Password</ion-label>
+                <ion-input type="password" formControlName="currentPassword" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>New Password</ion-label>
+                <ion-input type="password" formControlName="newPassword" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Confirm Password</ion-label>
+                <ion-input type="password" formControlName="confirmPassword" clearInput></ion-input>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="secondary" (tap)="change()" [disabled]="!isReadyToSave">Change</button>
+    </form>
+    <br />
+    <br />
+    <!-- <h3>Current Latitude: {{locationTracker.lat}}</h3>
+    <h3>Current Longitude: {{locationTracker.lng}}</h3>
+    <h3>Current User: {{locationTracker.userId}}</h3> -->
+ 
+</ion-content>

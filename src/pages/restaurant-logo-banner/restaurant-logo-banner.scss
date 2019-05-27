@@ -1,0 +1,55 @@
+page-restaurant-logo-banner {
+    .grid-bottom {
+        border-bottom: solid 1px rgba(196, 196, 196, 0.65)
+    }
+    .logo-wrapper {
+        text-align: center;
+        //margin: 1px 0;
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: inline-block;
+            background-size: 200px 200px;
+            background: no-repeat center;
+        }
+        .logo-placeholder {
+            display: inline-block;
+            background-color: #eee;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            font-size: 12px;
+            ion-icon {
+                font-size: 44px;
+                margin-bottom: -100px;
+                margin-top: 55px;
+            }
+        }
+    }
+    .banner-wrapper {
+        text-align: center;
+        //margin: 1px 0;
+        .banner {
+            width: 350px;
+            height: 200px;
+            border-radius: 0%;
+            display: inline-block;
+            background-size: 350px 200px;
+            background: no-repeat center;
+        }
+        .banner-placeholder {
+            display: inline-block;
+            background-color: #eee;
+            width: 350px;
+            height: 200px;
+            border-radius: 0%;
+            font-size: 12px;
+            ion-icon {
+                font-size: 44px;
+                margin-bottom: -100px;
+                margin-top: 55px;
+            }
+        }
+    }
+}

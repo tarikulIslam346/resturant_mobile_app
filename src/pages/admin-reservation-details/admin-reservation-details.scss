@@ -1,0 +1,16 @@
+page-admin-reservation-details {
+
+    .content{
+        .list{
+            .item:not(:first-child){
+                font-size: 14px;
+            }
+            .item{
+                .label{
+                    margin: 0px;
+                }
+            }
+        }
+    }
+
+}

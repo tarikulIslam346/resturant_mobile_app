@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>{{restaurant['name']}} Direction</ion-title>
+        <ion-buttons end icon-only>
+            <button ion-button (tap)="closeModal(false)">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div #map style="height: 100%"></div>
+</ion-content>

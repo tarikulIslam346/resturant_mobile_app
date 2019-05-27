@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" no-border-bottom color="secondary">
+        <ion-buttons start icon-only>
+            <button ion-button (tap)="closeModal(false)">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Search Refine</ion-title>
+        <ion-buttons end icon-only>
+            <button ion-button (tap)="done()">
+                Done
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-list padding> -->
+    <ion-item>
+        <ion-label color="dark" floating text-center>City/Zip</ion-label>
+        <ion-input type="text" [(ngModel)]="city" clearInput text-center></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="dark" floating text-center>Food / Ethnicity / Cuisine</ion-label>
+        <ion-input type="text" [(ngModel)]="food" clearInput text-center></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="dark" floating text-center>Restaurant Name</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant" clearInput text-center></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="dark" floating text-center>Distance</ion-label>
+        <ion-input type="number" [(ngModel)]="distance" clearInput text-center></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="dark" floating text-center>price</ion-label>
+        <ion-input type="number" [(ngModel)]="priceUpper" clearInput text-center></ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
+            <ion-item-divider color="light">Distance</ion-item-divider>
+            <ion-range [(ngModel)]="distance" pin="true" color="secondary">
+                <ion-icon range-left small name="remove"></ion-icon>
+                <ion-icon range-right name="add"></ion-icon>
+            </ion-range>
+        </ion-item> -->
+    <!-- <ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-input type="number" [(ngModel)]="priceRange.lower" placeholder="Lower" clearInput></ion-input>
+                </ion-col>
+                <ion-col>
+                    <ion-input type="number" [(ngModel)]="priceRange.upper" placeholder="Upper" clearInput></ion-input>
+                </ion-col>
+            </ion-row>
+        </ion-item> -->
+    <!-- </ion-list> -->
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="closeMenuModal(false)">
+        <ion-icon name="arrow-back"></ion-icon>Back
+      </button>
+        </ion-buttons>
+        <ion-title>Menu</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <ion-input type="hidden" formControlName="menuId"></ion-input>
+        <ion-input type="hidden" formControlName="categoryId"></ion-input>
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>Name</ion-label>
+                <ion-input type="text" formControlName="name" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Description</ion-label>
+                <ion-input type="text" formControlName="description" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Price ($)</ion-label>
+                <ion-input type="number" formControlName="price" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Category</ion-label>
+                <ion-input type="text" formControlName="category" clearInput (ionFocus)="getCategory()"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Status</ion-label>
+                <ion-toggle color="secondary" formControlName="status"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button *ngIf="!menu" ion-button full round color="secondary" (tap)="addMenu()" [disabled]="!isReadyToSave">Add</button>
+        <button *ngIf="menu" ion-button full round color="secondary" (tap)="updateMenu()" [disabled]="!isReadyToSave">Update</button>
+    </form>
+</ion-content>

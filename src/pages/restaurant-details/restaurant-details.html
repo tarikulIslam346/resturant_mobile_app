@@ -1,0 +1,16 @@
+<ion-content>
+    <ion-item no-lines [style.backgroundImage]="getBanner()" class="restaurant-cover-img">
+        <ion-icon end name="create" style="position: absolute;right: 5%;"></ion-icon>
+        <ion-item no-lines>
+            <ion-avatar item-start>
+                <img src="{{logo}}">
+            </ion-avatar>
+            <h1>{{restaurant['name']}}</h1>
+            <p>{{restaurant['address']}}</p>
+            <p (click)="callTheRestaurant(restaurant['contact'])">
+            {{restaurant['contact']}}<ion-icon name="call"></ion-icon></p>
+            <button ion-button>Open</button>
+        </ion-item>
+    </ion-item>
+    <div #map style="height: 80%"></div>
+</ion-content>

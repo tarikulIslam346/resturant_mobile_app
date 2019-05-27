@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="closeModal(false)">
+        <ion-icon name="arrow-back"></ion-icon>Back
+      </button>
+        </ion-buttons>
+        <ion-title>Upload Image</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processReviewImage($event)" />
+        <div class="review-image-wrapper" (tap)="getPicture()">
+            <div class="review-image-placeholder" *ngIf="!this.form.controls.reviewImg.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    Add Image
+                </div>
+            </div>
+            <div class="review-image" [style.backgroundImage]="getReviewImageStyle()" *ngIf="this.form.controls.reviewImg.value"></div>
+        </div>
+        <button ion-button full round color="secondary" (tap)="submit()" [disabled]="!isReadyToSave">Submit</button>
+    </form>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>Booking Details</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let r of bookingDetails; let i = index">
+            <ion-thumbnail item-start>
+                <img src="{{ specialImgUrl + r.image }}">
+            </ion-thumbnail>
+            <ion-row no-padding>
+                <ion-col text-center>
+                    {{r.sp_title}}
+                </ion-col>
+                <ion-col text-center>
+                    {{r.qty }}
+                </ion-col>
+                <ion-col text-right>
+                    ${{ r.qty * (r.price - r.price * r.discount/100) }}
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail item-start></ion-thumbnail>
+            <ion-row no-padding>
+                <ion-col> Total </ion-col>
+                <ion-col text-center> = </ion-col>
+                <ion-col text-right> $ {{getTotalPrice()}} </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+    <button *ngIf="isConfirmAble" ion-button full round color="secondary" (tap)="confirmBooking()">Confirm</button>
+    <button *ngIf="isCancelable && !isConfirmAble" ion-button full round color="danger" (tap)="cancelBooking()">Cancel</button>
+</ion-content>

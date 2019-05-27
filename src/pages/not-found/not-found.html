@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button clear (tap)="closeModal(false)">
+          <ion-icon name="arrow-back"></ion-icon>
+      </button>
+        <ion-title>Sign Up</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <div class="signUpChoiceHead">
+        <img src="assets/imgs/omelete-re.png" alt="omelete">
+
+    </div>
+    <div class="signUpChoiceBody">
+        <ion-grid class="body-head">
+            <ion-row>
+                <ion-col col-2>Orders</ion-col>
+                <ion-col col-2 text-center>Favorite</ion-col>
+                <ion-col col-4 text-center>Reviews/Message</ion-col>
+                <ion-col col-2 text-center>Images</ion-col>
+                <ion-col col-2 text-center>Cart</ion-col>
+            </ion-row>
+        </ion-grid>
+        <p>History -> Day/week/month Or spaecific date</p>
+        <ion-grid class="body-bottom">
+            <ion-row class="col_decoration" *ngIf="!isLoggedIn">
+                <ion-col>
+                    <button ion-button block clear (click)="signUpChoicePage()" style="padding-left:50%">Sign Up</button>
+                </ion-col>
+                <ion-item></ion-item>
+                <ion-col>
+                    <button ion-button block clear (click)="login()" style="padding-right:50%">Sign In</button>
+                </ion-col>
+                <!-- <ion-col col-12 text-center><p>If signed in then here see own data</p></ion-col>
+              <ion-col col-12 text-center><p>Logout</p></ion-col> -->
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

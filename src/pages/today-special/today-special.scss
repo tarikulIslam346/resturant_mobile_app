@@ -1,0 +1,69 @@
+page-today-special {
+    ion-navbar[hidebackbutton] button[menutoggle] {
+        display: block !important;
+    }
+    .content {
+        .advance-search {
+            padding: 0;
+
+            button{
+                // margin: 0;
+                width: 100%;
+                color: gray;
+                .icon{
+                    padding-left: 10%;
+                }
+            }
+
+            .advance-input{
+                border: 1px solid darkgray;
+                .col{
+                    padding: 0;
+                }
+            }   
+        }
+    }
+    .card {
+        border-radius: 10px;
+        .card-content {
+            padding: 5px;
+            img {
+                margin-right: 30px;
+                border-radius: 10px;
+                // width: 80px;
+                height: 80px;
+            }
+            [col-9] {
+                padding-left: 10px;
+                .item-restutent {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                .item-food-name {
+                    font-size: 17px;
+                }
+                .item-price {
+                    font-size: 16px;
+                }
+                .item-head {
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+
+                button{
+                    font-size: 12px;
+                    padding: 0 8px;
+                    background-color: #32db64;
+                }
+            }
+        }
+    }
+    /* ion-footer {
+        height: 7%;
+    } */
+    .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+}

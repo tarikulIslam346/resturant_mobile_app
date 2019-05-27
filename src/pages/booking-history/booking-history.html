@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Reservation History</ion-title>
+        <button ion-button menuToggle right color="secondary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list-header color="dark-light">
+        Today's Reservation
+    </ion-list-header>
+    <ion-list inset>
+        <button ion-item *ngFor="let t of todaysReservationList; let i = index;" (click)="itemSelected(t, 'Today')">
+            {{i + 1}}. Restaurant: {{t.rest_name}}
+            <p>
+                Total: ${{ t.total }}
+            </p>
+            <p>
+                Status:
+                <span *ngIf="t.status === '0'" style="color:coral">
+                    Cancel
+                </span>
+                <span *ngIf="t.status === '1'" style="color:rgb(0, 89, 255)">
+                    Pending
+                </span>
+                <span *ngIf="t.status === '2'" style="color:green">
+                    Confirmed
+                </span>
+            </p>
+        </button>
+    </ion-list>
+    <ion-list *ngIf="isEmpty">
+        <ion-item>
+            No reservation found
+        </ion-item>
+    </ion-list>
+    <ion-list-header color="dark-light">
+        Previous Reservation
+    </ion-list-header>
+    <ion-list inset>
+        <button ion-item *ngFor="let p of previousReservationList; let i = index;" (click)="itemSelected(p, 'Previous')">
+            {{i + 1}}. Restaurant: {{p.rest_name}}
+            <p>
+                Total: ${{ p.total }}
+            </p>
+            <p>
+                Status:
+                <span *ngIf="p.status === '0'" style="color:coral">
+                    Cancel
+                </span>
+                <span *ngIf="p.status === '1'" style="color:rgb(0, 89, 255)">
+                    Pending
+                </span>
+                <span *ngIf="p.status === '2'" style="color:green">
+                    Confirmed
+                </span>
+            </p>
+        </button>
+    </ion-list>
+    <ion-list *ngIf="isEmpty2">
+        <ion-item>
+            No reservation found
+        </ion-item>
+    </ion-list>
+</ion-content>

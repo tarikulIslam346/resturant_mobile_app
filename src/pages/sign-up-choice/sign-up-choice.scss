@@ -1,0 +1,45 @@
+page-sign-up-choice {
+    .content{
+        .signUpChoiceHead{
+            background: url(../assets/imgs/omelete.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 40%;
+            text-align: center;
+            img{
+                margin-top: 10%;
+            }
+            button{
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: transparent;
+                .icon{
+                    font-size: 2.2em;
+                }
+            }
+        }
+        .signUpChoiceBody{
+            margin: 15% 22%;
+            .top-text{
+                font-size: 14px;
+                font-weight: 500;
+                color: gray;
+                padding-bottom: 16px;
+            }
+            .bottom-text{
+                margin-top: 50%;
+                font-size: 14px;
+                color: gray;
+            }
+
+            button{
+                margin: 1.4rem 0.2rem;
+                background: #32db64;
+            }
+        }
+
+
+    }
+
+}

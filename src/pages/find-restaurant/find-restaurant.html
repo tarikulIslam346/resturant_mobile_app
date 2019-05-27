@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-buttons start icon-only>
+            <button ion-button (tap)="closeModal(false)">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Find Restaurant</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!-- <div #map id="map"></div> -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col>
+                <ion-row>
+                    <ion-col>
+                        <ion-searchbar type="text" [(ngModel)]="restaurant" [formControl]="restaurantControl" (ionInput)="onSearchInput()" placeholder="Restaurant" clearInput="true"></ion-searchbar>
+                    </ion-col>
+                    <ion-col>
+                        <ion-searchbar type="text" [(ngModel)]="city" [formControl]="cityControl" (ionInput)="onSearchInput()" placeholder="City zip"></ion-searchbar>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            <ion-thumbnail item-start>
+                <img src="assets/imgs/green-logo.png">
+            </ion-thumbnail>
+            Oops!! Didn’t find my restaurant! <br>No Problem.
+            <button ion-item (click)="goToClamMyBusiness()">
+                Register Here
+                </button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-list [virtualScroll]="restaurantList" approxItemHeight="160px">
+        <button ion-item (click)="goToClamMyBusiness(r)" *virtualItem="let r">
+            <ion-thumbnail item-start>
+                <img src="assets/imgs/green-logo.png">
+            </ion-thumbnail>
+            <h2>{{r.name}}</h2>
+            <h3>{{r.category}}</h3>
+            <p>{{r.contact}}</p>
+            <p>{{r.address}}, {{r.locality}}, {{r.region}}</p>
+            <p>
+                <span>Rating:</span>
+                <ion-icon name="star" *ngFor="let num of getStartArray(r['rating'])" [ngStyle]="{'color': getColor(r['rating'], num)}"></ion-icon>
+            </p>
+        </button>
+    </ion-list>
+</ion-content>

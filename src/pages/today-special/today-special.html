@@ -1,0 +1,123 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" color="secondary">
+        <ion-title text-center>Today's Special</ion-title>
+        <button ion-button menuToggle right>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content #pageTop>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid class="advance-search">
+        <ion-row>
+            <ion-col col-4 class="advance-button">
+                <button ion-button clear (click)="advanceSearch()"><span>Filters</span><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
+            </ion-col>
+            <ion-col col-8>
+                <ion-row class="advance-input">
+                    <ion-col col-2>
+                        <button ion-button clear (click)="decreasePrice()"><ion-icon name="remove"></ion-icon></button>
+                    </ion-col>
+                    <ion-col col-8>
+                        <ion-input type="number" [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Price" text-center></ion-input>
+                    </ion-col>
+                    <ion-col col-2>
+                        <button ion-button clear (click)="increasePrice()"><ion-icon name="add"></ion-icon></button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <!-- <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="Food"></ion-searchbar> -->
+        </ion-row>
+    </ion-grid>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            Opps! No Special Found.
+        </ion-card-content>
+    </ion-card>
+    <!-- <ion-list *ngIf="!isEmpty">
+        <ion-list-header color="light">Near By (5 km radious)</ion-list-header>
+    </ion-list> -->
+    <ion-card *ngFor="let s of specialList">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-avatar (click)="goToDetails(s)">
+                            <img src="{{ specialImgUrl + s.image }}">
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col col-9>
+                        <p class="item-restutent" style="padding-right:15px">
+                            <span (click)="goToDetails(s)">
+                                {{s.name}}
+                            </span>
+                            <span style="color: green; position: absolute; top: 9px; right: 9px;">
+                                <ion-icon name="information-circle" (click)="showInformation(s)"></ion-icon>
+                            </span>
+                        </p>
+                        <p class="item-food-name">{{s.title}}</p>
+                        <p class="item-price">Price: ${{s.price - s.price * s.discount/100 }} - (<del>${{s.price}}</del>)</p>
+                        <p><span class="item-head">Distance:</span> {{getDistanceFromLatLonInKm(s.lat, s.lng) | number}} km</p>
+                        <p><span class="item-head">Opening:</span> {{s.opening}}</p>
+                        <p>
+                            <span class="item-head">Rating:</span>
+                            <ion-icon name="star" *ngFor="let num of getStartArray(s.rating)" [ngStyle]="{'color': getColor(s.rating, num)}"></ion-icon>
+                        </p>
+                        <button ion-button small round (click)="bookAmountConfirm(s)">Book Now</button>
+                        <button *ngIf="!isFavourite(s.user_id)" ion-button round small (click)="addFavourite(s)">Add To Favourite</button>
+                        <button *ngIf="isFavourite(s.user_id)" ion-button round small (click)="removeFavourite(s)">Remove Favourite</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <!-- <ion-list *ngIf="!isEmpty2">
+        <ion-list-header color="light">Specials Around You</ion-list-header>
+    </ion-list>
+    <ion-card *ngFor="let s of othersList">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-avatar (click)="goToDetails(s)">
+                            <img src="{{ specialImgUrl + s.image }}">
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col col-9>
+                        <p class="item-restutent">
+                            <span (click)="goToDetails(s)">
+                                {{s.name}}
+                            </span>
+                            <span style="color: green; position: absolute; top: 9px; right: 9px;">
+                                <ion-icon name="information-circle" (click)="showInformation(s)"></ion-icon>
+                            </span>
+                        </p>
+                        <p class="item-food-name">{{s.title}}</p>
+                        <p class="item-price">Price: ${{s.price - s.price * s.discount/100 }} - (<del>${{s.price}}</del>)</p>
+                        <p><span class="item-head">Distance:</span> {{getDistanceFromLatLonInKm(s.lat, s.lng) | number}} km</p>
+                        <p><span class="item-head">Opening:</span> {{s.opening}}</p>
+                        <p>
+                            <span class="item-head">Rating:</span>
+                            <ion-icon name="star" *ngFor="let num of getStartArray(s.rating)" [ngStyle]="{'color': getColor(s.rating, num)}"></ion-icon>
+                        </p>
+                        <p>
+                            <button ion-button color="secondary" round small (click)="addToReserveList(s)">Book Now</button>
+                            <button *ngIf="!isFavourite(s.user_id)" round ion-button small (click)="addFavourite(s)">Add To Favourite</button>
+                            <button *ngIf="isFavourite(s.user_id)" round ion-button small (click)="removeFavourite(s)">Remove Favourite</button>
+                        </p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card> -->
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

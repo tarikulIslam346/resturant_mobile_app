@@ -1,0 +1,209 @@
+<ion-content>
+    <!-- <ion-item no-lines [style.backgroundImage]="getBanner()" class="restaurant-cover-img" *ngIf="isEmptyReservation()"> -->
+    <ion-item no-lines [style.backgroundImage]="getBanner()" class="restaurant-cover-img">
+        <ion-icon *ngIf="myRestId === restId" end name="create" style="position: absolute;right: 5%;color:green" (click)="goToLogoBanner()"></ion-icon>
+        <ion-item no-lines>
+            <ion-avatar item-start>
+                <img src="{{logo}}">
+            </ion-avatar>
+            <h1>{{restaurant['name']}}</h1>
+            <p>{{restaurant['address']}}</p>
+            <p (click)="callTheRestaurant(restaurant['contact'])">
+                {{restaurant['contact']}}
+                <ion-icon name="call"></ion-icon>
+            </p>
+            <span *ngIf="isOpen()">
+                <button ion-button color="secondary">Open</button>
+            </span>
+            <span *ngIf="!isOpen()">
+                <button ion-button color="danger">Closed</button>
+            </span>
+        </ion-item>
+        <ion-item>
+            <ion-segment [(ngModel)]="icons" color="">
+                <ion-segment-button value="camera">
+                  Todays
+                </ion-segment-button>
+                <ion-segment-button value="bookmark">
+                  Menu
+                </ion-segment-button>
+                <ion-segment-button value="add">
+                 Review
+                </ion-segment-button>
+                <ion-segment-button value="apps">
+                  Image
+                </ion-segment-button>
+              </ion-segment>
+        </ion-item>
+    </ion-item>
+
+
+
+    <!-- <ion-item no-lines *ngIf="!isEmptyReservation()">
+        <ion-card class="reservation-bottom" *ngFor="let r of reservationList; let i = index">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img src="{{ specialImgUrl + r.image }}">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-11>
+                                <p class="food-name">{{r.title}}</p>
+                            </ion-col>
+                            <ion-col col-1 text-right>
+                                <ion-note>
+                                    <ion-icon name="trash" (click)=removeItem(i)></ion-icon>
+                                </ion-note>
+                            </ion-col>
+                            <ion-col col-12>
+                                <p class="food-price">${{ r.qty * (r.price - r.price * r.discount/100) }}</p>
+                            </ion-col>
+                            <ion-col col-12>
+                                <ion-note>
+                                    <p class="food-quantity">Quantity:
+                                        <ion-icon color="danger" name="remove" (click)=decreaseQty(i) style="padding-left: 5%;"></ion-icon>
+                                        &nbsp; {{r.qty }}&nbsp;
+                                        <ion-icon color="secondary" name="add" (click)=increaseQty(i)></ion-icon>
+                                    </p>
+                                </ion-note>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <ion-card class="reservation-top">
+            <ion-card-header>
+                My Order
+            </ion-card-header>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <ion-note>
+                            Food Quantity:
+                        </ion-note>
+                    </ion-col>
+                    <ion-col class="reservation-deco">
+                        {{getQuantity()}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-note>
+                            Sub Total:
+                        </ion-note>
+                    </ion-col>
+                    <ion-col class="reservation-deco">
+                        ${{getTotalPrice() | number}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-right>
+                        <button ion-button small round color="secondary" (click)="gotToReservation()">Order</button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button small round color="secondary" (tap)="cancel()">Cancel</button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+        <div class="resturent-details">
+            <ion-row>
+                <ion-col col-12 text-center>
+                    <p class="rest-name">{{restaurant['name']}}</p>
+                    <p class="rest-address">{{restaurant['address']}}</p>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-item> -->
+
+    <!-- <ion-card padding>
+        <img src="{{ specialImgUrl + selected.image }}" style="max-height:200px" />
+        <ion-card-content>
+            <ion-card-title>
+                <p class="item-food-name">{{selected.title}}</p>
+                <p class="item-price">Price: ${{selected.price - selected.price * selected.discount/100 }} - (<del>${{selected.price}}</del>)</p>
+            </ion-card-title>
+            <p><span class="item-head">For:</span> {{ selected.for }} </p>
+            <p><span class="item-head">Address:</span> {{selected.address}}</p>
+            <p><span class="item-head">Distance:</span> {{getDistanceFromLatLonInKm(selected.lat, selected.lng) | number}} km</p>
+            <p><span class="item-head">Opening:</span> {{selected.opening}}</p>
+            <p>
+                <span class="item-head">Rating:</span>
+                <ion-icon name="star" *ngFor="let num of getStartArray(selected.rating)" [ngStyle]="{'color': getColor(selected.rating, num)}"></ion-icon>
+            </p>
+            <p>{{ getday(selected.available) }}</p>
+        </ion-card-content>
+        <ion-row no-padding>
+            <ion-col>
+                <button *ngIf="!selected['isFavourite']" ion-button clear small color="secondary" icon-start (click)="addFavourite()">
+                    <ion-icon name='heart-outline'></ion-icon> Add Favorite
+                </button>
+                <button *ngIf="selected['isFavourite']" ion-button clear small color="secondary" icon-start (click)="removeFavourite()">
+                    <ion-icon name='heart'></ion-icon> Remove Favorite
+                </button>
+            </ion-col>
+            <ion-col text-right>
+                <button ion-button clear small color="secondary" icon-start (click)="addToReserveList(selected)">
+                    <ion-icon name='cart'></ion-icon> Reserved Now
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card> -->
+
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            No Menu Found.
+        </ion-card-content>
+    </ion-card>
+    <ion-list-header color="dark-light" *ngIf="!isEmpty">
+        <h2>Others Specials</h2>
+    </ion-list-header>
+    <ion-row class="others-special" *ngFor="let l of specials">
+        <ion-list-header color="dark-light">
+            {{l.day}}
+        </ion-list-header>
+        <ion-card class="reservation-bottom" *ngFor="let s of l.list">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img src="{{ specialImgUrl + s.image }}">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-8>
+                                    <ion-note>
+                                <p class="food-name">{{s.title}}</p>
+                                <!-- <p class="food-description">{{s.s_description}}</p> -->
+                            </ion-note>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-note>
+                                    <p class="food-price" text-right>${{s.price - s.price * s.discount/100 }} (${{s.price}})</p>
+                                </ion-note>
+                            </ion-col>
+                            <ion-col col-12>
+                                <ion-note>
+                                    <p class="food-description">{{s.s_description}}</p>
+                                </ion-note>
+                            </ion-col>
+                            <ion-col col-12>
+                                <span class="special-cart" *ngIf="l.day === 'Today'">
+                                    <!-- <ion-icon name='cart' color="secondary" item-end (click)="addToReserveList(s)"></ion-icon> -->
+                                    <button name='cart' ion-button small round color="secondary" (click)="addToReserveList(s)">Add</button>
+                                </span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </ion-row>
+
+    <ion-fab right bottom *ngIf="!isEmptyReservation()">
+        <button ion-fab mini color="secondary" (click)="gotToReservation()">
+            <ion-icon name="cart"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

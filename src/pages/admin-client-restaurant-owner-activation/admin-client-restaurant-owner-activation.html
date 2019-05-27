@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" color="secondary">
+        <ion-title>Restaurant Owner Activation</ion-title>
+        <button ion-button menuToggle right>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content #pageTop>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="User Name or Client Id">
+    </ion-searchbar>
+    <ion-card *ngFor="let s of userList" [class.hide]="s.rest_id == null">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-7>
+                        <p class="item-food-name">Client ID# {{s.client_id}}</p>
+                        <p class="item-price">Name: {{s.first_name +' '+ s.last_name}} </p>
+                    </ion-col>
+                    <ion-col col-5 text-right>
+                        <button round *ngIf="isOpen(s.status)" ion-button color="secondary" (click)="updateStatus(s.status,s.id)">Active </button>
+                        <button round *ngIf="!isOpen(s.status)" ion-button color="danger" (click)="updateStatus(s.status,s.id)">Inactive</button><br>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

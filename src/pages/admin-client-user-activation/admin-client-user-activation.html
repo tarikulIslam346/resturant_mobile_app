@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" color="secondary">
+        <ion-title>User Activation</ion-title>
+        <button ion-button menuToggle right>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content #pageTop>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="User Name or Client Id">
+    </ion-searchbar>
+    <ion-card *ngFor="let s of userList">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-7>
+                        <!-- <form [formGroup]="form"> -->
+                        <!-- <p class="item-restutent" style="padding-right:15px">
+                            <span (click)="goToDetails(s)">
+                                {{s.name}}
+                            </span>
+                            <span style="color: green; position: absolute; top: 9px; right: 9px;">
+                                <ion-icon name="information-circle" (click)="showInformation(s)"></ion-icon>
+                            </span>
+                        </p> -->
+                        <p class="item-price"><strong>Name: </strong>{{s.first_name +' '+ s.last_name}} </p>
+                        <p class="item-food-name"><strong>ID# </strong>{{s.client_id}}</p>
+                        <p class="item-food-name"><strong>Phone: </strong>{{s.contact}}</p>
+                        <!-- <div > -->
+                        <!-- <ng-container *ngif="s.status == 1;  else elsecondition">
+                            <ion-toggle [(ngModel)]="isToggled" (ionChange)="notify(s.status)"></ion-toggle>
+                        </ng-container>
+                        <ng-template #elsecondition>
+                            <ion-toggle [(ngModel)]="!isToggled" (ionChange)="notify(s.status)"></ion-toggle>
+                        </ng-template> -->
+                        <!-- <ion-item end>
+                            <ion-toggle #ifcondition [(ngModel)]="isToggled" (ionChange)="notify(s.status)"></ion-toggle>
+                            <ion-toggle #elsecondition [(ngModel)]="!isToggled" (ionChange)="notify(s.status)"></ion-toggle>
+                        </ion-item> -->
+                        <!-- </div> -->
+                        <!-- <div *ngif="s.status">
+                            <ion-item end>
+                                <ion-toggle [(ngModel)]="!isToggled" (ionChange)="notify(s.status)"></ion-toggle>
+                            </ion-item>
+                        </div> -->
+
+                        <!-- <ion-item end> -->
+                        <!-- <ion-toggle formControlName="status"></ion-toggle> -->
+                        <!-- </ion-item> -->
+                        <!-- </form> -->
+
+                    </ion-col>
+                    <ion-col text-right>
+                        <button round *ngIf="isOpen(s.status)" ion-button color="secondary" (click)="updateStatus(s.status,s.id)">Active </button>
+                        <button round *ngIf="!isOpen(s.status)" ion-button color="danger" (click)="updateStatus(s.status,s.id)">Inactive</button><br>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <!--   <div [formGroup]="form">
+                <ion-item>
+                    <ion-toggle formControlName="toggle1" (ionChange)="updateToggleSet(1)"></ion-toggle>
+                </ion-item>
+                <ion-item>
+                    <ion-toggle formControlName="toggle2" (ionChange)="updateToggleSet(2)"></ion-toggle>
+                </ion-item>
+            </div> -->
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

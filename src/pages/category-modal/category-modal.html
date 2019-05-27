@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="closeNewModal(false)">
+                <ion-icon name="arrow-back"></ion-icon>Back
+            </button>
+        </ion-buttons>
+        <ion-title>Category</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <ion-list>
+            <ion-input type="hidden" formControlName="categoryId"></ion-input>
+            <ion-item>
+                <ion-label fixed>Name</ion-label>
+                <ion-input type="text" formControlName="name" clearInput></ion-input>
+            </ion-item>
+        </ion-list>
+        <button *ngIf="!category" ion-button full round color="secondary" (tap)="addCategory()" [disabled]="!isReadyToSave">Add</button>
+        <button *ngIf="category" ion-button full round color="secondary" (tap)="updateCategory()" [disabled]="!isReadyToSave">Update</button>
+    </form>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" color="secondary">
+        <ion-title>Restaurant's Reservation</ion-title>
+        <button ion-button menuToggle right>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+        <ion-item>
+            <ion-row>
+                <ion-col  col-3>
+                    Restaurant's
+                </ion-col>
+                <ion-col  col-3 text-right>
+                    Served
+                </ion-col>
+                <ion-col  col-3 text-right>
+                    Pending
+                </ion-col>
+                <ion-col  col-3 text-right>
+                    Cancel
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <button ion-item *ngFor="let r of list" (click)="getRestaurantReservationDetails(r)">
+            <ion-row>
+                <ion-col col-4>
+                    {{r.name}}
+                </ion-col>
+                <ion-col col-3 text-center>
+                    {{(r.confirmed >= 1)? r.confirmed : 0}}
+                </ion-col>
+                <ion-col col-3 text-center>
+                    {{(r.pending >= 1)? r.pending : 0}}
+                </ion-col>
+                <ion-col col-2 text-right>
+                    {{(r.cancelled >= 1)? r.cancelled : 0}}
+                </ion-col>
+            </ion-row>
+        </button>
+    </ion-list>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            No Restaurant found
+        </ion-card-content>
+    </ion-card>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

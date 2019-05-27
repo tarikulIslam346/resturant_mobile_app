@@ -1,0 +1,14 @@
+<ion-content>
+    <div class="signUpChoiceHead">
+        <img src="assets/imgs/logo-black.png" alt="logo">
+        <button ion-button (tap)="closeModal(false)">
+          <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </div>
+    <div class="signUpChoiceBody">
+        <p text-center text-uppercase class="top-text">Choose your account type</p>
+        <button ion-button full round (click)="signUp()">I am a customer</button>
+        <button ion-button full round (click)="ownerSignUp()">I am a rastaurant owner</button>
+        <p text-center class="bottom-text">Be a part of our food community</p>
+    </div>
+</ion-content>

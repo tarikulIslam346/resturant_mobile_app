@@ -1,0 +1,38 @@
+<ion-menu [content]="content" side="right" [ngClass]="{'login-menu': isLoggedIn === true, 'logout-menu': isLoggedIn !== true}">
+    <ion-content>
+        <div class="wrap-menu">
+            <div text-center *ngIf="!isLoggedIn">
+                <img src="assets/imgs/icon.png" alt="logo" menuClose (click)="goToHome()">
+            </div>
+
+            <div text-center *ngIf="isLoggedIn">
+                <img *ngIf="user.profilePic" class="profile-image" src="{{userImageUrl + user.profilePic}}" alt="user" menuClose (click)="goToHome()">
+                <img *ngIf="!user.profilePic" class="profile-image" src="assets/imgs/profile/others-icon.png" alt="user" menuClose (click)="goToHome()">
+                <h5>{{user.firstName + " " + user.lastName}}</h5>
+                <p>{{user.email}}</p>
+                <p>Client ID: {{user.clientId}}</p>
+            </div>
+
+            <ion-list no-lines class="list-decoration">
+                <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                    {{p.title}}
+                </ion-item>
+            </ion-list>
+
+            <ion-list no-lines>
+                <ion-item menuClose ion-item *ngFor="let f of footer" (click)="openPage(f)">
+                    {{f.title}}
+                </ion-item>
+                <ion-item *ngIf="!isLoggedIn" menuClose ion-item (click)="login()">
+                    Sign In
+                </ion-item>
+                <ion-item *ngIf="isLoggedIn" menuClose ion-item (click)="logout()">
+                    Logout
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

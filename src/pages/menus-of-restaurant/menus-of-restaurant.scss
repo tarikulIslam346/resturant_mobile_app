@@ -1,0 +1,99 @@
+page-menus-of-restaurant {
+    .item-restutent {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .item-food-name {
+        font-size: 17px;
+    }
+    .item-price {
+        font-size: 16px;
+    }
+    .item-head {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+
+
+    .restaurant-cover-img{
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+
+        .icon{
+            color: #fff;
+        }
+
+        .item-inner{
+            position: relative;
+            button{
+                position: absolute;
+                top: 5%;
+                right: 5%;
+                background-color: #32db64;
+                padding: 14px;
+            }
+        }
+
+        .item{
+            margin-top: 25%;
+            // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+            border: 1px solid gainsboro;
+    
+            img{
+                border-radius: 0;
+                width: 36px;
+                height: 36px;
+            }
+    
+            h1{
+                font-size: 20px;
+                font-weight: 600;
+            }
+            p{
+                font-size: 16px;
+            }
+        }
+
+        p{
+            .icon{
+                color: green;
+                font-size: 17px;
+                margin-left: 2%;
+                // background: green;
+                padding: 4px 10px;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    .others-special{
+        img{
+            height: 120px;
+        }
+        .card-content{
+            padding: 0px 10px 10px;
+            .card-title{
+                padding: 8px 0 0;
+            }
+
+            p{
+                display: flex;
+                justify-content: space-between;
+                .special-price{
+                    font-size: 18px;
+                    color:red;
+                    font-weight: 600;
+                }
+                .special-cart{
+                    color: #32db64;
+                }
+            }
+            
+        }
+    }
+
+}

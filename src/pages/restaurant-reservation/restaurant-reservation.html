@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar hideBackButton="false" color="secondary">
+        <ion-title>Reservation</ion-title>
+        <button ion-button menuToggle right>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-tabs color="secondary">
+        <ion-tab tabTitle="Today's" [root]="todaysTab"></ion-tab>
+        <ion-tab tabTitle="Confirmed" [root]="confirmTab"></ion-tab>
+        <ion-tab tabTitle="Cancel" [root]="cancelTab"></ion-tab>
+        <ion-tab tabTitle="Pending" [root]="pendingTab"></ion-tab>
+        <ion-tab tabTitle="Report" [root]="reportTab"></ion-tab>
+    </ion-tabs>
+</ion-content>

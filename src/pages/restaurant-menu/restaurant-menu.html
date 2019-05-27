@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="addMenuModal()">
+                <ion-icon name="md-add"></ion-icon>Add
+            </button>
+        </ion-buttons>
+        <ion-title>Menu</ion-title>
+        <button ion-button menuToggle right color="secondary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            No Menu Found.
+        </ion-card-content>
+    </ion-card>
+    <ion-list *ngIf="!isEmpty">
+        <button ion-item *ngFor="let m of menus" (click)="editMenuModal(m)">
+            <ion-icon name="md-restaurant" item-start></ion-icon>
+            {{ m.name }}
+            <ion-note item-end>
+                ${{m.price}}
+            </ion-note>
+        </button>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-content padding>
+    <div text-center>
+        <img src="assets/imgs/green-full-logo-1.png" alt="logo">
+    </div>
+
+    <button ion-button (click)="todaySpecials()" class="special-search"> Today's Special <ion-icon name="arrow-forward"></ion-icon></button>
+    <button *ngIf="isLoggedIn && userType === '1'" ion-button (click)="seeReport()" class="special-search"> See Report <ion-icon name="arrow-forward"></ion-icon></button>
+    <button *ngIf="isLoggedIn && userType === '2'" ion-button (click)="seeReservation()" class="special-search"> See Reservation <ion-icon name="arrow-forward"></ion-icon></button>
+    <!-- <button ion-button full round (click)="findSpecials()">Find Special <ion-icon name="arrow-forward"></ion-icon></button>
+    <button ion-button full round (click)="searchFood()">Search Food <ion-icon name="arrow-forward"></ion-icon></button> -->
+
+    <ion-row class="col_decoration" *ngIf="!isLoggedIn">
+        <ion-col>
+            <button ion-button block clear (click)="signUpChoicePage()" style="padding-left:50%">Sign Up</button>
+        </ion-col>
+        <ion-item></ion-item>
+        <ion-col>
+            <button ion-button block clear (click)="login()" style="padding-right:50%">Sign In</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="col_decoration">
+        <ion-col>
+            <button *ngIf="isLoggedIn" ion-button block clear (click)="logout()">Logout</button>
+        </ion-col>
+    </ion-row>
+    <div text-center class="term_condition" *ngIf="!isLoggedIn">
+        <button ion-button block clear item-end outline icon-end (click)="goToTermsAndCondition()">
+            Term and Condition
+            <ion-icon name='arrow-forward'></ion-icon>
+        </button>
+        <!-- <button ion-button block clear (click)="goToTermsAndCondition()">Term and Condition <ion-icon name="arrow-forward"></ion-icon></button> -->
+    </div>
+
+    <!-- <button ion-button (click)="notFound()" class="special-search"> test not found</button> -->
+
+</ion-content>

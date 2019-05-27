@@ -1,0 +1,27 @@
+page-review-image-modal {
+    .review-image-wrapper {
+        text-align: center;
+        //margin: 1px 0;
+        .review-image {
+            width: 300px;
+            height: 200px;
+            border-radius: 0%;
+            display: inline-block;
+            background-size: 300px 200px;
+            //background: no-repeat center;
+        }
+        .review-image-placeholder {
+            display: inline-block;
+            background-color: #eee;
+            width: 300px;
+            height: 200px;
+            border-radius: 0%;
+            font-size: 12px;
+            ion-icon {
+                font-size: 44px;
+                margin-bottom: -10px;
+                margin-top: 70px;
+            }
+        }
+    }
+}

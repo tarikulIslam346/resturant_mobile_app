@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start icon-only>
+            <button ion-button color="secondary" (tap)="closeModal(false)">
+                <ion-icon name="arrow-back"></ion-icon>Back
+            </button>
+        </ion-buttons>
+        <ion-title>Special</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processWebImage($event)" />
+        <div class="special-image-wrapper" (tap)="getSpecial()">
+            <div class="special-image-placeholder" *ngIf="!this.form.controls.specialPic.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    Add Special
+                </div>
+            </div>
+            <div class="special-image" [style.backgroundImage]="getSpecialImageStyle()" *ngIf="this.form.controls.specialPic.value"></div>
+        </div>
+        <br />
+        <ion-list>
+
+            <ion-item>
+
+                <ion-label fixed>Title</ion-label>
+                <ion-input type="text" formControlName="title" clearInput value=""></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Description</ion-label>
+                <ion-input type="text" formControlName="description" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Price ($)</ion-label>
+                <ion-input type="number" formControlName="price" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Discount</ion-label>
+                <ion-input type="number" formControlName="discount" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>For</ion-label>
+                <ion-input type="text" formControlName="for" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Available</ion-label>
+                <ion-select #availablity formControlName="available" interface="alert" (click)="openSelect(availablity)" multiple="true">
+                    <ion-option (ionSelect)="selectAll(availablity)" [value]="All">All</ion-option>
+                    <ion-option *ngFor="let d of days; let i = index" [value]="d">{{d}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Status</ion-label>
+                <ion-toggle color="secondary" formControlName="status"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button *ngIf="!speId" ion-button full round color="secondary" (tap)="addSpecial()" [disabled]="!isReadyToSave">Special Upload</button>
+        <button *ngIf="speId" ion-button full round color="secondary" (tap)="updateSpecial()" [disabled]="!isReadyToSave">Special Upload</button>
+    </form>
+</ion-content>

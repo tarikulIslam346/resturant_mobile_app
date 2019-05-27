@@ -1,0 +1,28 @@
+
+<ion-content>
+    <div class="signUpChoiceHead">
+        <img src="assets/imgs/logo-black.png" alt="logo">      
+        <button ion-button (tap)="closeModal(false)">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </div>
+    <div class="signUpChoiceBody">
+        <p text-center text-uppercase class="top-text">sign In</p>
+
+        <form *ngIf="form" [formGroup]="form">
+            <div class="item-wrap">
+                <ion-item>
+                    <!-- <ion-label floating>E-mail</ion-label> -->
+                    <ion-input type="email" formControlName="email" placeholder="Email" clearInput></ion-input>
+                </ion-item>
+                <ion-item>
+                    <!-- <ion-label floating>Password</ion-label> -->
+                    <ion-input type="password" formControlName="password" placeholder="Password" clearInput></ion-input>
+                </ion-item>
+            </div>
+            <button ion-button full round (tap)="login()" [disabled]="!isReadyToSave" class="login-button">Sign In</button>
+            <p text-right class="forgot-password" (click)="goToForgotPassword()">Forgot Password?</p>
+            <p class="registerNow" text-center><span class="plain-text">Don't have an account?</span><span class="link-text" (click)="goToRegisterPage()"> Register</span></p>
+        </form>
+    </div>
+</ion-content>

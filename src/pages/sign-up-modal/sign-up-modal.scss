@@ -1,0 +1,51 @@
+page-sign-up-modal {
+
+    .header{
+        .button{
+            background-color: transparent;
+            color: #000;
+            
+        }
+    }
+
+    .content{
+        text-align: center;
+        img{
+            height: 100px;
+        }
+        form{
+            margin: 0 12%;
+           .item{
+               padding-left: 0;
+               .label{
+                   color: gray;
+                   font-size: 14px;
+               }
+               .checkbox-icon{
+                   border-radius: 0;
+               }
+           }
+
+           .checkBox{
+               margin-top: 10%;
+           }
+
+           button{
+               margin-top: 10%;
+               padding: 0 20%;
+           }
+        }
+
+        .plain-text{
+            color: gray;
+        }
+        .link-text{
+            font-weight: 500;
+        }
+
+        .error {
+            color:brown;
+        }
+    }
+
+}

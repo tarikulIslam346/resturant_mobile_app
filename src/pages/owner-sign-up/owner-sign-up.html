@@ -1,0 +1,137 @@
+<ion-header>
+    <!-- <ion-navbar> -->
+    <!-- <ion-title>Signup</ion-title> -->
+    <ion-buttons icon-only>
+        <button ion-button (tap)="closeModal(false)">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <!-- </ion-navbar> -->
+</ion-header>
+<ion-content>
+    <img src="assets/imgs/green-logo.png" alt="logo">
+    <form *ngIf="form" [formGroup]="form">
+        <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input type="text" formControlName="firstName" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('firstName').hasError('required') ) && form.get('firstName').touched">
+            <span class="error" *ngIf="form.get('firstName').hasError('required') || form.get('firstName').touched">
+                Please input your First Name
+            </span>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input type="text" formControlName="lastName" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('lastName').hasError('required') ) && form.get('lastName').touched">
+            <span class="error" *ngIf="form.get('lastName').hasError('required') || form.get('lastName').touched">
+                Please input your Last Name
+            </span>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label floating>Restaurant Name</ion-label>
+            <ion-input type="text" formControlName="restaurant_name" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="isManual && ( form.get('restaurant_name').hasError('required') ) && form.get('restaurant_name').touched">
+            <span class="error" *ngIf="form.get('restaurant_name').hasError('required') || form.get('restaurant_name').touched">
+                Please input your restaurant Name
+            </span>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label fixed>Opening</ion-label>
+            <!-- <ion-input type="text" formControlName="opening" clearInput placeholder="11:00 AM"></ion-input> -->
+            <ion-datetime formControlName="opening" displayFormat="hh:mm A" pickerFormat="hh:mm A" placeholder="Opening" clearInput></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label fixed>Closing</ion-label>
+            <!-- <ion-input type="text" formControlName="opening" clearInput placeholder="11:00 AM"></ion-input> -->
+            <ion-datetime formControlName="closing" displayFormat="hh:mm A" pickerFormat="hh:mm A" placeholder="Closing" clearInput></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label fixed>Street</ion-label>
+            <ion-input type="text" formControlName="street" clearInput placeholder="Street"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="isManual && ( form.get('street').hasError('required') ) && form.get('street').touched">
+            <span class="error" *ngIf="form.get('street').hasError('required') || form.get('street').touched">
+                Please input your restaurant Street address
+            </span>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label fixed>City</ion-label>
+            <ion-input type="text" formControlName="city" clearInput placeholder="City"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="isManual && ( form.get('city').hasError('required') ) && form.get('city').touched">
+            <span class="error" *ngIf="form.get('city').hasError('required') || form.get('city').touched">
+                Please input your restaurant City
+            </span>
+        </ion-item>
+        <ion-item *ngIf="isManual">
+            <ion-label fixed>Zip Code</ion-label>
+            <ion-input type="text" formControlName="postcode" clearInput placeholder="Post Code"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="isManual && ( form.get('postcode').hasError('required') ) && form.get('postcode').touched">
+            <span class="error" *ngIf="form.get('postcode').hasError('required') || form.get('postcode').touched">
+                Please input your restaurant Zip Code
+            </span>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>E-mail</ion-label>
+            <ion-input type="email" formControlName="email" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('email').hasError('minlength') || form.get('email').hasError('pattern') ||form.get('email').hasError('required') ) && form.get('email').touched">
+            <div class="error" *ngIf="form.get('email').hasError('required') && form.get('email').touched">
+                Please input your email
+            </div>
+            <div class="error" *ngIf="form.get('email').hasError('pattern') && form.get('email').touched">
+                Email address invalid
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Phone</ion-label>
+            <ion-input type="number" formControlName="contact" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" formControlName="password" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('password').hasError('minlength') ||form.get('password').hasError('required') ) && form.get('password').touched">
+            <span class="error" *ngIf="form.get('password').hasError('required') && form.get('password').touched">
+                Please input your password
+            </span>
+            <span class="error" *ngIf="form.get('password').hasError('minlength') && form.get('password').touched">
+                Minimum 4 characters
+            </span>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input type="password" formControlName="conPassword" clearInput></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('conPassword').hasError('minlength') ||form.get('conPassword').hasError('required') ) && form.get('conPassword').touched">
+            <span class="error" *ngIf="form.get('conPassword').hasError('required') && form.get('conPassword').touched">
+                Please input your confirm password
+            </span>
+        </ion-item>
+        <ion-item no-lines class="checkBox">
+            <ion-label style="font-weight:500;color:black;font-size: 12px">I agree to terms and conditions</ion-label>
+            <ion-checkbox color="secondary" formControlName="condition"></ion-checkbox>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('condition').hasError('required') ) && form.get('condition').touched">
+            <span class="error" *ngIf="form.get('condition').hasError('required') || form.get('condition').touched">
+                Please accept Foodoli's terms of services <br /> and privacy policy.
+            </span>
+        </ion-item>
+        <ion-item no-lines class="checkBox">
+            <ion-label style="font-weight:500;color:black;font-size: 12px">I am authorised to open an account</ion-label>
+            <ion-checkbox color="secondary" formControlName="authorized"></ion-checkbox>
+        </ion-item>
+        <ion-item no-lines *ngIf="( form.get('authorized').hasError('required') ) && form.get('authorized').touched">
+            <span class="error" *ngIf="form.get('authorized').hasError('required') || form.get('authorized').touched">
+                Please accept if you are the authorized person <br/> to open this account.
+            </span>
+        </ion-item>
+        <button ion-button round color="secondary" (tap)="signUp()" [disabled]="!isReadyToSave">Sign Up</button>
+    </form>
+    <p text-center><span class="plain-text">Already have an account?</span> <span class="link-text" (click)="goToSignInPage()">Sign
+            In</span></p>
+</ion-content>

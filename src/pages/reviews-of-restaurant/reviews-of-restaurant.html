@@ -1,0 +1,40 @@
+<ion-content>
+    <ion-item no-lines [style.backgroundImage]="getBanner()" class="restaurant-cover-img">
+        <ion-icon end name="create" style="position: absolute;right: 5%;"></ion-icon>
+        <ion-item no-lines>
+            <ion-avatar item-start>
+                <img src="{{logo}}">
+            </ion-avatar>
+            <h1>{{restaurant['name']}}</h1>
+            <p>{{restaurant['address']}}</p>
+            <p (click)="callTheRestaurant(restaurant['contact'])">
+                {{restaurant['contact']}}
+                <ion-icon name="call"></ion-icon>
+            </p>
+            <button ion-button>Open</button>
+        </ion-item>
+    </ion-item>
+
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            No Review Found.
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let r of reviews">
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="{{ userImageUrl + r.profile_pic }}">
+            </ion-avatar>
+            <h2>{{ r.first_name +' '+ r.last_name }}</h2>
+        </ion-item>
+        <img *ngIf="r.image" src="{{ reviewsImageUrl + r.image }}">
+        <ion-card-content>
+            <p text-capitalize>{{r.review}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-fab right bottom *ngIf="isLoggedIn">
+        <button ion-fab mini color="secondary" (click)="addReviewModal()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-searchbar #search [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" (ionClear)="onClearInput()" show-cancel="true" placeholder="City Name. (Letter min 4)"></ion-searchbar>
+        <ion-buttons end icon-only>
+            <button ion-button (tap)="closeModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="isEmpty && !searching">
+        <ion-card-content text-center>
+            No City Found.
+        </ion-card-content>
+    </ion-card>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-list *ngIf="!isEmpty">
+        <ion-list-header color="dark-light">
+            Pick One Category
+        </ion-list-header>
+        <ion-item *ngFor="let c of cityList" (tap)="setCity(c)">
+            <ion-label text-capitalize>
+                {{c.name}}
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

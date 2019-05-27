@@ -1,0 +1,33 @@
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            Opps! Special Not Found.
+        </ion-card-content>
+    </ion-card>
+    <ion-list>
+        <ion-item *ngFor="let r of reservationList" (click)="goToReservationDetails(r)">
+            <ion-avatar item-start>
+                <img src="{{userImageUrl + r.profile_pic}}">
+            </ion-avatar>
+            <h2>{{r.first_name +' '+ r.last_name}}</h2>
+            <p>
+                Client ID: {{r.client_id}},
+                <ion-icon name="time"></ion-icon> {{r.created_at | date:'shortTime'}}
+            </p>
+            <p>
+                <ion-icon name="mail"></ion-icon> {{r.email}},
+                <ion-icon name="call"></ion-icon> {{r.contact}}
+            </p>
+            <ion-note item-end style="color:coral">
+                <ion-icon name="logo-usd"></ion-icon> {{r.total}}
+            </ion-note>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

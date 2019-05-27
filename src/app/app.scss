@@ -1,0 +1,114 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.logout-menu{
+
+    .content{
+        background-color: #3bb44a;
+        .wrap-menu{
+            padding: 40px;
+            margin-top: 10%;
+            img{
+                border-bottom: 1px solid #fff;
+                padding-bottom: 20px;
+            }
+
+            .list-decoration{
+                margin-bottom: 5px;
+                padding: 20px 0;
+                border-bottom: 1px solid #fff;
+                .item{
+                    background-color: #3bb44a;
+                    padding-left:0;
+                    .label{
+                        color: #fff;
+                    }
+                }
+            }
+            .item{
+                background-color: #3bb44a;
+                padding-left:0;
+                .label{
+                    color: #fff;
+                }
+            }
+        }
+        
+    }
+}
+
+.login-menu{
+
+    .content{
+        background-color: #fff;
+        .wrap-menu{
+            padding: 20px 40px 40px;
+            img{
+                width: 105px;
+                height: 105px;
+                border-radius: 50%;
+                display: inline-block;
+                background-size: 105px 105px;
+                // padding-bottom: 20px;
+            }
+
+            p{
+                margin: 0;
+            }
+            h5{
+                margin-top: 0;
+            }
+
+            .list-decoration{
+                margin: 15px 0;
+                padding: 10px 0;
+                border-bottom: 1px solid #111;
+                border-top: 1px solid #111;
+                .item{
+                    background-color: #fff;
+                    padding-left:0;
+                    .label{
+                        color: #111;
+                    }
+                }
+            }
+            .item{
+                background-color: #fff;
+                padding-left:0;
+                .label{
+                    color: #111;
+                }
+            }
+        }
+        
+    }
+}
+
+// .profile-image-wrapper {
+//     text-align: center;
+//     //margin: 1px 0;
+//     .profile-image {
+//         width: 105px;
+//         height: 105px;
+//         border-radius: 50%;
+//         display: inline-block;
+//         background-size: 105px 105px;
+//         //background: no-repeat center;
+//     }
+// }
+
+    

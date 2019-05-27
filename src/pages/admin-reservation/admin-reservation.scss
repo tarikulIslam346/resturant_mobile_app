@@ -1,0 +1,29 @@
+page-admin-reservation {
+    .content{
+
+        .list{
+            .item{
+                .row{
+                    font-size: 14px;
+                    .col{
+                        white-space: normal;
+                    }
+                }
+            }
+
+            button{
+                .item-inner{
+                    background-size: 14px 12px;
+                    .label{
+                        margin:0px;
+                        .row{
+                            .col{
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

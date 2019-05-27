@@ -1,0 +1,66 @@
+page-images-of-restaurant {
+    ion-note {
+        font-size: 12px;
+        align-self: flex-start;
+        margin-top: 14px;
+    }
+    .item-restutent {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .item-food-name {
+        font-size: 17px;
+    }
+    .item-price {
+        font-size: 16px;
+    }
+    .item-head {
+        font-weight: 600;
+        font-size: 16px;
+    }
+    .restaurant-cover-img {
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        .icon {
+            color: #fff;
+        }
+        .item-inner {
+            position: relative;
+            button {
+                position: absolute;
+                top: 5%;
+                right: 5%;
+                background-color: #32db64;
+                padding: 12px;
+            }
+        }
+        .item {
+            margin-top: 25%;
+            border: 1px solid gainsboro;
+            img {
+                border-radius: 0;
+                width: 36px;
+                height: 36px;
+            }
+            h1 {
+                font-size: 20px;
+                font-weight: 600;
+            }
+            p {
+                font-size: 16px;
+            }
+        }
+        p {
+            .icon {
+                color: green;
+                font-size: 17px;
+                margin-left: 2%;
+                padding: 4px 10px;
+                border-radius: 4px;
+            }
+        }
+    }
+}

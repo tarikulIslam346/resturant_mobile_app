@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Profile</ion-title>
+        <button ion-button menuToggle right color="secondary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form">
+        <input type="file" #fileInput style="visibility: hidden; height: 0" name="files[]" (change)="processWebImage($event)" />
+        <div class="profile-image-wrapper" (tap)="getPicture()">
+            <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    Add Image
+                </div>
+            </div>
+            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+        </div>
+        <br />
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>First Name</ion-label>
+                <ion-input type="text" formControlName="firstName" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Last Name</ion-label>
+                <ion-input type="text" formControlName="lastName" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>E-mail</ion-label>
+                <ion-input type="email" formControlName="email" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Contact</ion-label>
+                <ion-input type="number" formControlName="contact" clearInput></ion-input>
+            </ion-item>
+            <!-- <ion-item>
+                <ion-label fixed>Gender</ion-label>
+                <ion-input type="text" formControlName="gender"></ion-input>
+            </ion-item> -->
+            <ion-item>
+                <ion-label fixed>DOB</ion-label>
+                <ion-input type="date" formControlName="dob" clearInput></ion-input>
+            </ion-item>
+        </ion-list>
+        <button ion-button full round color="secondary" (tap)="update()" [disabled]="!isReadyToSave">Update</button>
+    </form>
+</ion-content>

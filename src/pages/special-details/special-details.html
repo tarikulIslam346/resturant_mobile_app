@@ -1,0 +1,216 @@
+<!-- <ion-header>
+    <ion-navbar color="secondary">
+        <ion-buttons start icon-only>
+            <button ion-button (tap)="closeModal()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Special Details</ion-title>
+        <button ion-button menuToggle right color="secondary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header> -->
+
+<ion-header>
+        <ion-navbar hideBackButton="false" color="secondary">
+            <button ion-button menuToggle (tap)="closeModal()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+            <ion-title text-center>Special Details</ion-title>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content>
+    <ion-item no-lines [style.backgroundImage]="getBanner()" class="restaurant-cover-img">
+        <ion-icon *ngIf="myRestId === restId" end name="create" style="position: absolute;right: 5%;color:green" (click)="goToLogoBanner()"></ion-icon>
+    </ion-item>
+    <div class="restaurent-info">
+        <ion-item no-lines>
+            <ion-row>
+                <ion-col col-2>
+                    <img src="{{logo}}">
+                </ion-col>
+                <ion-col col-7 style="white-space: normal;">
+                    <h1>{{restaurant['name']}}</h1>
+                    <p>{{restaurant['address']}}</p>
+                </ion-col>
+                <ion-col col-3 text-right>
+                    <button round *ngIf="isOpen()" ion-button color="secondary" style="padding: 0 8px;">Open</button>
+                    <button round *ngIf="!isOpen()" ion-button color="danger" style="padding: 0 8px;">Closed</button><br>
+                    <button ion-button round color="secondary" [disabled]="!isOpen()" (click)="callTheRestaurant(restaurant['contact'])"><ion-icon name="call"></ion-icon></button>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <div class="special-nav">
+            <ion-segment [(ngModel)]="view" color="secondary" (ionChange)="segmentChanged($event)">
+                <ion-segment-button value="special">
+                    Special
+                </ion-segment-button>
+                <ion-segment-button value="othersMenu">
+                    Menu
+                </ion-segment-button>
+                <ion-segment-button value="review">
+                    Reviews
+                </ion-segment-button>
+                <ion-segment-button value="upload">
+                    Uploads
+                </ion-segment-button>
+                <ion-segment-button value="map">
+                    Direction
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+    </div>
+
+    <!-- <ion-content>
+        <ion-tabs color="secondary">
+            <ion-tab tabTitle="Special" [root]="specialTab" [rootParams]="special"></ion-tab>
+            <ion-tab tabTitle="Menu" [root]="menuTab" [rootParams]="special"></ion-tab>
+            <ion-tab tabTitle="Direction" [root]="restaurantTab" [rootParams]="special"></ion-tab>
+            <ion-tab tabTitle="Reviews" [root]="reviewsTab" [rootParams]="special"></ion-tab>
+            <ion-tab tabTitle="Uploads" [root]="reviewImageTab" [rootParams]="special"></ion-tab>
+        </ion-tabs>
+    </ion-content> -->
+
+    <div [ngSwitch]="view">
+        <div *ngSwitchCase="'special'">
+            <ion-card *ngIf="isSpecialEmpty">
+                <ion-card-content text-center>
+                    No Menu Found.
+                </ion-card-content>
+            </ion-card>
+            <ion-list-header color="dark-light" *ngIf="!isSpecialEmpty">
+                <h2 text-center>Others Specials</h2>
+            </ion-list-header>
+            <ion-row class="others-special" *ngFor="let l of specials">
+                <ion-list-header color="dark-light">
+                    {{l.day}}
+                </ion-list-header>
+                <ion-card class="reservation-bottom" *ngFor="let s of l.list">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-3>
+                                <img src="{{ specialImgUrl + s.image }}">
+                            </ion-col>
+                            <ion-col col-9>
+                                <ion-row>
+                                    <ion-col col-8>
+                                        <ion-note>
+                                            <p class="food-name">{{s.title}}</p>
+                                            <!-- <p class="food-description">{{s.s_description}}</p> -->
+                                        </ion-note>
+                                    </ion-col>
+                                    <ion-col col-4 style="margin:auto">
+                                        <ion-note>
+                                            <p class="food-price" text-right>${{s.price - s.price * s.discount/100 }} (${{s.price}})</p>
+                                        </ion-note>
+                                    </ion-col>
+                                    <ion-col col-12>
+                                        <ion-note>
+                                            <p class="food-description">{{s.s_description}}</p>
+                                        </ion-note>
+                                    </ion-col>
+                                    <ion-col col-12>
+                                        <span class="special-cart" *ngIf="l.day === 'Today'">
+                                            <!-- <ion-icon name='cart' color="secondary" item-end (click)="addToReserveList(s)"></ion-icon> -->
+                                            <button name='cart' [disabled]="!isOpen()" ion-button small round color="secondary" (click)="addToReserveList(s)">Add</button>
+                                        </span>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-row>
+        </div>
+
+        <div *ngSwitchCase="'othersMenu'">
+            <ion-card *ngIf="isMenuEmpty">
+                <ion-card-content text-center>
+                    No Menu Found.
+                </ion-card-content>
+            </ion-card>
+            <div *ngIf="!isMenuEmpty">
+                <ion-list>
+                    <ion-list-header color="dark-light">
+                        <h2>Others Menu</h2>
+                    </ion-list-header>
+                </ion-list>
+                <ion-item-group *ngFor="let m of menus">
+                    <ion-item-divider color="light">{{m.category}}</ion-item-divider>
+                    <ion-item *ngFor="let l of m.list">
+                        <ion-icon name="md-restaurant" item-start></ion-icon>
+                        {{ l.name }}, {{ l.details }}
+                        <ion-note item-end style="color: coral;">
+                            ${{l.price}}
+                        </ion-note>
+                    </ion-item>
+                </ion-item-group>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'review'">
+            <ion-card *ngIf="isReviewEmpty">
+                <ion-card-content text-center>
+                    No Review Found.
+                </ion-card-content>
+            </ion-card>
+            <ion-card *ngFor="let r of reviews">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="{{ userImageUrl + r.profile_pic }}">
+                    </ion-avatar>
+                    <h2>{{ r.first_name +' '+ r.last_name }}</h2>
+                </ion-item>
+                <img *ngIf="r.image" src="{{ reviewsImageUrl + r.image }}">
+                <ion-card-content>
+                    <p text-capitalize>{{r.review}}</p>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'upload'">
+            <ion-card *ngIf="isReviewImagesEmpty">
+                <ion-card-content text-center>
+                    No Upload Found.
+                </ion-card-content>
+            </ion-card>
+            <ion-card *ngFor="let r of reviewImages">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="{{ userImageUrl + r.profile_pic }}">
+                    </ion-avatar>
+                    <h2>{{ r.first_name +' '+ r.last_name }}</h2>
+                </ion-item>
+                <ion-card-content>
+                    <img *ngIf="r.image" src="{{ uploadImageUrl + r.image }}">
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'map'">
+            <div #map [style.width]="'100%'" [style.height]="height"></div>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <ion-fab right bottom *ngIf="!isEmptyReservation()">
+        <button ion-fab mini color="secondary" (click)="gotToReservation()">
+            <ion-icon name="cart"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-fab right bottom *ngIf="view === 'review'">
+        <button ion-fab mini color="secondary" (click)="addReviewModal()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-fab right bottom *ngIf="view === 'upload'">
+        <button ion-fab mini color="secondary" (click)="addReviewImageModal()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-footer>

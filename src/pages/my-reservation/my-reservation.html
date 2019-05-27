@@ -1,0 +1,187 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-buttons start icon-only *ngIf="isModal">
+            <button ion-button (tap)="closeModal(false)">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>My Reservation</ion-title>
+        <button ion-button menuToggle right>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            Reservation list is empty.
+        </ion-card-content>
+    </ion-card>
+    <div *ngIf="!isEmpty">
+
+        <ion-card class="reservation-top">
+            <ion-card-header>
+                My Order
+            </ion-card-header>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <ion-note>
+                            Food Quantity:
+                        </ion-note>
+                    </ion-col>
+                    <ion-col class="reservation-deco">
+                        <!-- {{reservationList.length}} -->
+                        {{getQuantity()}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-note>
+                            Sub Total:
+                        </ion-note>
+                    </ion-col>
+                    <ion-col class="reservation-deco">
+                        $ {{getTotalPrice()| number}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-note>
+                            Approximate time:
+                        </ion-note>
+                    </ion-col>
+                    <ion-col class="reservation-deco">
+                        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="time" placeholder="9:00"></ion-datetime>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-right>
+                        <button ion-button small round color="secondary" (tap)="reservedSpecials()">Place Order</button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button small round color="secondary" (tap)="cancel()">Cancel</button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+        <div class="resturent-details">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <p class="rest-name">{{restName}}</p>
+                        <p class="rest-address">{{restAddress}}</p>
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        <p class="res-date">Date</p>
+                        <p class="res-date">{{today | date}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <ion-card class="reservation-bottom" *ngFor="let r of reservationList; let i = index">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img src="{{ specialImgUrl + r.image }}">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-11>
+                                <p class="food-name">{{r.title}}</p>
+                            </ion-col>
+                            <ion-col col-1 text-right>
+                                <ion-note>
+                                    <ion-icon name="trash" (click)=removeItem(i)></ion-icon>
+                                </ion-note>
+                            </ion-col>
+                            <ion-col col-12>
+                                <p class="food-price">${{ r.qty * (r.price - r.price * r.discount/100) | number }}</p>
+                            </ion-col>
+                            <ion-col col-12>
+                                <ion-note>
+                                    <p class="food-quantity">Quantity:
+                                        <ion-icon color="danger" name="remove" (click)=decreaseQty(i)></ion-icon>
+                                        &nbsp; {{r.qty }}&nbsp;
+                                        <ion-icon color="secondary" name="add" (click)=increaseQty(i)></ion-icon>
+                                    </p>
+                                </ion-note>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+
+        <!-- <ion-list> -->
+        <!-- <ion-list-header color="dark-light">
+                <h2>Added Specials</h2>
+            </ion-list-header>
+            <ion-item>
+                <ion-thumbnail item-start></ion-thumbnail>
+                <ion-row no-padding>
+                    <ion-col text-center>
+                        Name
+                    </ion-col>
+                    <ion-col text-center>
+                        Qty
+                    </ion-col>
+                    <ion-col text-right>
+                        Price
+                    </ion-col>
+                    <ion-col text-center>
+                        <ion-icon name="trash"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-item> -->
+        <!-- <ion-item *ngFor="let r of reservationList; let i = index">
+                <ion-thumbnail item-start>
+                    <img src="{{ specialImgUrl + r.image }}">
+                </ion-thumbnail>
+                <ion-row no-padding>
+                    <ion-col text-center>
+                        {{r.title}}
+                    </ion-col>
+                    <ion-col text-center>
+                        <ion-icon color="danger" name="remove" (click)=decreaseQty(i)></ion-icon>
+                        &nbsp; {{r.qty }}&nbsp;
+                        <ion-icon color="secondary" name="add" (click)=increaseQty(i)></ion-icon>
+                    </ion-col>
+                    <ion-col text-right>
+                        ${{ r.qty * (r.price - r.price * r.discount/100) }}
+                    </ion-col>
+                    <ion-col text-center>
+                        <ion-icon color="danger" name="trash" (click)=removeItem(i)></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-item> -->
+        <!-- <ion-item>
+                <ion-thumbnail item-start></ion-thumbnail>
+                <ion-row no-padding>
+                    <ion-col>
+                        Total
+                    </ion-col>
+                    <ion-col text-center>
+                        =
+                    </ion-col>
+                    <ion-col text-right>
+                        $ {{getTotalPrice()}}
+                    </ion-col>
+                    <ion-col></ion-col>
+                </ion-row>
+            </ion-item> -->
+        <!-- </ion-list> -->
+        <!-- <ion-list>
+            <ion-list-header color="dark-light">
+                <h2>When I will came (Approx. Time).</h2>
+            </ion-list-header>
+            <ion-item>
+                <ion-datetime displayFormat="hh:mm A" [(ngModel)]="time"></ion-datetime>
+            </ion-item>
+        </ion-list> -->
+        <!-- <button ion-button full round color="secondary" (tap)="reservedSpecials()">Reserve</button> -->
+    </div>
+</ion-content>

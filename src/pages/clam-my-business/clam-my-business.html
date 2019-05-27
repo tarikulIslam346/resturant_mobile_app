@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>Clam My Business</ion-title>
+        <ion-buttons end icon-only>
+            <button ion-button small clear style="color: #ffffff" (tap)="clamMyBusiness()"> Clam </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-list no-lines>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="assets/imgs/green-logo.png">
+                    </ion-avatar>
+                    {{ restaurant.name }}
+                </ion-item>
+            </ion-list>
+        </ion-card-header>
+
+        <ion-list>
+            <ion-item>
+                <ion-icon name="restaurant" item-start></ion-icon>
+                {{ restaurant.category }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="information-circle" item-start></ion-icon>
+                {{ restaurant.description }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="restaurant" item-start></ion-icon>
+                {{ restaurant.ethnicity }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="restaurant" item-start></ion-icon>
+                {{ restaurant.cuisine }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="at" item-start></ion-icon>
+                {{ restaurant.address }}, {{ restaurant.locality }}, {{ restaurant.region }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="call" item-start></ion-icon>
+                {{ restaurant.contact }}
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="time" item-start></ion-icon>
+                {{ restaurant.opening }} - {{ restaurant.closing }}
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+</ion-content>

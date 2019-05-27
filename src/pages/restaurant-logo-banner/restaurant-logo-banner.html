@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Logo & Banner</ion-title>
+        <button ion-button menuToggle right color="secondary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form" text-center>
+        <!-- <label>Logo</label> -->
+        <input type="file" #logoInput style="visibility: hidden; height: 0" name="logoFiles[]" (change)="processWebLogo($event)" />
+        <div class="logo-wrapper" (tap)="getLogo()">
+            <div class="logo-placeholder" *ngIf="!this.form.controls.logo.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    Add Logo
+                </div>
+            </div>
+            <div class="logo" [style.backgroundImage]="getLogoStyle()" *ngIf="this.form.controls.logo.value"></div>
+        </div>
+        <br />
+
+        <!-- <label>Banner</label> -->
+        <input type="file" #bannerInput style="visibility: hidden; height: 0" name="bannerFiles[]" (change)="processWebBanner($event)" />
+        <div class="banner-wrapper" (tap)="getBanner()">
+            <div class="banner-placeholder" *ngIf="!this.form.controls.banner.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    Add Banner
+                </div>
+            </div>
+            <div class="banner" [style.backgroundImage]="getBannerStyle()" *ngIf="this.form.controls.banner.value"></div>
+        </div>
+        <br/>
+        <button ion-button full round color="secondary" (tap)="update()" [disabled]="!isReadyToSave">Update</button>
+    </form>
+</ion-content>

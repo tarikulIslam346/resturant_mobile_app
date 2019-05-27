@@ -1,0 +1,136 @@
+page-specials-of-restaurant {
+    ion-note {
+        font-size: 12px;
+        align-self: flex-start;
+        margin-top: 14px;
+    }
+    .item-restutent {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .item-food-name {
+        font-size: 17px;
+    }
+    .item-price {
+        font-size: 16px;
+    }
+    .item-head {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .content{
+        .restaurant-cover-img{
+            width: 100%;
+            height: auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+
+            .icon{
+                color: #fff;
+            }
+
+            .item-inner{
+                position: relative;
+                button{
+                    position: absolute;
+                    top: 5%;
+                    right: 5%;
+                    // background-color: #32db64;
+                    padding: 12px;
+                }
+            }
+
+            .item{
+                // margin-top: 25%;
+                // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+                border: 1px solid gainsboro;
+        
+                img{
+                    border-radius: 0;
+                    width: 36px;
+                    height: 36px;
+                }
+        
+                h1{
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+                p{
+                    font-size: 16px;
+                }
+            }
+            p{
+                .icon{
+                    color: green;
+                    font-size: 17px;
+                    margin-left: 2%;
+                    padding: 4px 10px;
+                    border-radius: 4px;
+                }
+            }
+            
+        }
+
+        .reservation-top{
+            .card-content{
+                padding: 0px 16px;
+                .reservation-deco{
+                    color: #32db64;
+                    text-align: right;
+                }
+                .datetime{
+                    padding: 0;
+                }
+            }
+        }
+
+        .reservation-bottom{
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+
+            .col{
+                padding: 2px;
+                .icon{
+                    font-size: 20px;
+                }
+            }
+
+            img{
+                // widows: 100%;
+                height: 92px;
+                border-radius: 4px;
+            }
+            .food-name{
+                font-size: 18px;
+                font-weight: 600;
+                color: #000;
+            }
+            .food-price{
+                font-size: 14px;
+
+            }
+            .food-description{
+                font-size: 16px;
+
+            }
+        }
+
+        .resturent-details{
+            padding: 0 10px;
+            .rest-name{
+                font-size: 18px;
+                font-weight: 600;
+                color: #000;
+                margin: 0 0 5px;
+            }
+            .rest-address{
+                font-size: 12px;
+                margin: 0 0 5px;
+            }
+        }
+    }
+
+
+    
+}

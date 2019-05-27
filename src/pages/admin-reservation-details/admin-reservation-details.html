@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>{{restaurant['name']}}'s Reservation</ion-title>
+        <button ion-button menuToggle right color="secondary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label>From</ion-label>
+                    <ion-datetime [(ngModel)]="from" [formControl]="searchFromControl" (ionInput)="onSearchInput()" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="From" clearInput></ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label>To</ion-label>
+                    <ion-datetime [(ngModel)]="to" [formControl]="searchToControl" (ionInput)="onSearchInput()" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="From" clearInput></ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+        <ion-item>
+            <ion-row>
+                <ion-col>
+                    Date
+                </ion-col>
+                <ion-col text-center>
+                    Served
+                </ion-col>
+                <ion-col text-center>
+                    Pending
+                </ion-col>
+                <ion-col text-center>
+                    Cancel
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item *ngFor="let r of list">
+            <ion-row>
+                <ion-col>
+                    {{r.date}}
+                    <!-- | date:'fullDate'-->
+                </ion-col>
+                <ion-col text-center>
+                    {{r.confirmed}}
+                </ion-col>
+                <ion-col text-center>
+                    {{r.pending}}
+                </ion-col>
+                <ion-col text-center>
+                    {{r.cancelled}}
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            No Restaurant found
+        </ion-card-content>
+    </ion-card>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

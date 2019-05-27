@@ -1,0 +1,42 @@
+page-search-food {
+    ion-navbar[hidebackbutton] button[menutoggle] {
+        display: block !important;
+    }
+    .card {
+        border-radius: 10px;
+        .card-content {
+            padding: 5px;
+            img {
+                margin-right: 30px;
+                border-radius: 10px;
+                // width: 80px;
+                height: 80px;
+            }
+            [col-9] {
+                padding-left: 25px;
+                .item-restutent {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                .item-food-name {
+                    font-size: 17px;
+                }
+                .item-price {
+                    font-size: 16px;
+                }
+                .item-head {
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    ion-footer {
+        height: 7%;
+    }
+    .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+}

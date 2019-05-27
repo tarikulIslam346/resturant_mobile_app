@@ -1,0 +1,58 @@
+<ion-content no-padding>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-datetime [(ngModel)]="from" [formControl]="fromControl" (ionInput)="onSearchInput()" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="From" clearInput></ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-datetime [(ngModel)]="to" [formControl]="toControl" (ionInput)="onSearchInput()" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="To" clearInput></ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input [(ngModel)]="day" [formControl]="dayControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="Day"></ion-input>
+                    <ion-select [(ngModel)]="day" [formControl]="dayControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="Day" #availablity interface="alert" (click)="openSelect(availablity)">
+                        <ion-option *ngFor="let d of days; let i = index" [value]="d">{{d}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-input [(ngModel)]="special" [formControl]="specialControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="Special"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <hr/>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            Opps! No Data Found.
+        </ion-card-content>
+    </ion-card>
+    <ion-list>
+        <ion-item *ngFor="let r of report">
+            <h2>{{r.title}}</h2>
+            <p ><strong>Order:</strong> {{r.confirmed + r.pending + r.cancelled }}</p>
+            <p><strong>Confirmed:</strong> {{r.confirmed}}</p>
+            <p><strong>Pending:</strong> {{r.pending}}</p>
+            <p><strong>Cancel:</strong> {{r.cancelled}}</p>
+         <!--    <p><strong>Date:</strong> {{r.d | date:'MMM d, y'}}</p>
+            <p><strong>Day:</strong> {{r.d | date:'EEEE'}}</p> -->
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

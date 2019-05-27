@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>My Favourite</ion-title>
+        <button ion-button menuToggle right color="secondary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-searchbar *ngIf="!isEmpty" [(ngModel)]="food" [formControl]="searchControl" (ionInput)="onSearchInput()" show-cancel="true" placeholder="Favourite Name"></ion-searchbar>
+
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-card *ngIf="isEmpty">
+        <ion-card-content text-center>
+            Opps! No Favourite Found.
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="reservation-bottom" *ngFor="let f of favouriteList; let i = index">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <img src="{{ specialImgUrl + f.image }}" (click)="goToDetails(f)"/>
+                </ion-col>
+                <ion-col col-9>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="food-name" (click)="goToDetails(f)">{{f.title}}</p>
+                        </ion-col>
+                        <ion-col col-1 text-right>
+                            <ion-note>
+                                <ion-icon name="heart" style="color:#32db64"></ion-icon>
+                            </ion-note>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p class="food-price">{{f.restaurant_name}}</p>
+                            <p class="food-price">{{f.address}}</p>
+                        </ion-col>
+                        <ion-col col-12 text-right>
+                            <ion-note>
+                                <ion-icon name="trash" (click)=removeItem(i)></ion-icon>
+                            </ion-note>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+
+
+
+    <!-- <ion-list>
+        <ion-item *ngFor="let f of favouriteList" (click)="goToDetails(f)">
+            <ion-thumbnail item-start>
+                <img src="{{ specialImgUrl + f.image }}" />
+            </ion-thumbnail>
+            <h2>
+                {{f.title}}
+            </h2>
+            <h6>{{f.description}}</h6>
+            <p>For {{f.for}}</p>
+            <p>{{ getday(f.available) }}</p>
+            <ion-note item-end style="color: coral">${{f.price - f.price * f.discount/100 }} - (<del>${{f.price}}</del>)</ion-note> -->
+            <!-- <ion-note item-end color="danger" (click)="removeFavourite(f.spe_id)">
+                <ion-icon name="trash"></ion-icon>
+            </ion-note> -->
+        <!-- </ion-item> -->
+    <!-- </ion-list> -->
+</ion-content>
